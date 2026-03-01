@@ -1,0 +1,66 @@
+# IMPORTANT PARAM: actual velocity in training / testing
+velocity: 6.0
+# used to align the vel/acc, ensure consistency between testing and training.
+# during testing, if vel*n then acc*n*n, please refer to ../policy/primitive.py
+vel_align: 6.0
+acc_align: 6.0
+
+# IMPORTANT PARAM: weight of penalties (6m/s)
+wg: 0.1    # guidance
+ws: 0.0015 # smoothness
+wc: 0.5    # collision
+wt: 0.4 # trackloss(now fov)
+
+# dataset
+dataset_path: "../dataset"
+image_height: 96
+image_width: 160
+mask_width: 40
+mask_height: 24
+
+# trajectory and primitive param (Note: traj_time = 2 * radio / vel_max)
+horizon_num: 5
+vertical_num: 3
+horizon_camera_fov: 90.0
+vertical_camera_fov: 60.0
+horizon_anchor_fov: 30.0
+vertical_anchor_fov: 30.0
+radio_range: 5.0    # planning horizon: 2 * radio_range
+radio_num: 1        # only support 1 currently
+
+# safety penalties
+d0: 1.2
+r: 0.6
+
+# distribution parameters for unit state sampling (no need to adjust)
+vx_mean_unit: 0.5
+vy_mean_unit: 0.0
+vz_mean_unit: 0.0
+vx_std_unit: 1.7
+vy_std_unit: 0.45
+vz_std_unit: 0.3
+ax_mean_unit: 0.0
+ay_mean_unit: 0.0
+az_mean_unit: 0.0
+ax_std_unit: 0.4
+ay_std_unit: 0.4
+az_std_unit: 0.3
+goal_pitch_std: 10.0  # clip goal_length to: 2 * radio_range; 10% probability [0, 2 * radio_range]
+goal_yaw_std: 20.0
+
+# extend the map to avoid trajectory exceeding bounds (especially in z-axis) and treating the sky outside the map as obstacle
+map_expand_min: [0, 0, 0.2]
+map_expand_max: [0, 0, 6.0]
+
+
+# 传感器信息
+camera:
+  fx: 80.0             # focal length x
+  fy: 80.0             # focal length y
+  cx: 80.0             # principal point x (image center)
+  cy: 45.0              # principal point y (image center)
+  image_width: 160
+  image_height: 90
+  max_depth_dist: 20.0
+  normalize_depth: false
+  pitch: -0.0           # 相机相对机体的俯仰角 (仰为负, cpu版尚未添加)
