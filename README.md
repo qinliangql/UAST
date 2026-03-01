@@ -2,7 +2,7 @@
 
 ## Introduction:
 
-This repository contains the implementation of the UAST Method presented in our paper. UAST is a mapping-free solution that unifies active search and persistent tracking of arbitrary targets using only RGB-D observations, designed to operate efficiently in cluttered environments.
+This repository presents a simplified implementation of the simulator version of the UAST method. UAST is a mapping-free solution that unifies active search and persistent tracking of arbitrary targets using only RGB-D observations, designed to operate efficiently in cluttered environments.
 
 
 ## Installation
